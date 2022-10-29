@@ -43,6 +43,9 @@
           </div>
 
         </div>
+        @can('update_post', $post)
+
+
         <div class="container">
             <div class="row justify-content-center">
 
@@ -61,6 +64,7 @@
             </div>
 
 
+@endcan
             </div>
 
       </div>

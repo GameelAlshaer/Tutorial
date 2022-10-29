@@ -40,12 +40,22 @@
           <div class="col-auto">
             <div class="bg-white border-radius-lg d-flex me-2">
 
+                @auth
+
+
                 <form class=""  method="POST" action="/logout">
                     @csrf
 
               <input type="submit" value="Logout" class="btn bg-gradient-primary my-1 me-1" >
 
                 </form>
+                @endauth
+                @guest
+
+                <a class="btn bg-gradient-primary my-1 me-1" href="/login">Login</a>
+
+                @endguest
+
             </div>
           </div>
         </div>

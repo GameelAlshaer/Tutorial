@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-
+use App\Models\User;
+use App\Models\Post;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +26,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // Gate::define('update_post',function(User $user, Post $post){
+        //     return $post->user->is($user);
+
+        // });
+
+
+        Gate::before(function(User $user){
+            if($user->id == 6){
+                return true;
+            }
+        });
     }
 }

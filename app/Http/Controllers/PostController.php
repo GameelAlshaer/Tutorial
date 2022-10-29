@@ -85,7 +85,8 @@ class PostController extends Controller
      */
     public function update(Post $post)
     {
-         $post->update($this->validate_request());
+        $this->authorize('update_post',$post);
+         $post->update($this->validate_update_request());
          return redirect('/posts');
     }
 
@@ -97,6 +98,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('update_post',$post);
+
        $post->delete();
        return redirect('/posts');
     }
@@ -120,6 +123,19 @@ class PostController extends Controller
         $post['image']=$path;
         return $post;
    }
+
+   protected function validate_update_request(){
+    return request()->validate([
+      'title' =>['required'],
+      'post_type'=>['required'],
+      'body'=>['required'],
+      'author'=>['required'],
+
+   ]);
+
+   //for uploaded images
+
+}
 }
 
 
