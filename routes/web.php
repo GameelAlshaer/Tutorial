@@ -29,44 +29,32 @@ use App\Policies\PostPolicy;
 // )->with('post',$post);
 // });
 
-Route::get('/',function () {
 
 
- return view('welcome',[
-    'post' => file_get_contents(__DIR__.'/../resources/posts/first-post.html')
- ]);
-});
-Route::group(['middleware'=>'can:update_post,post'],function(){
 
-    //Route::resource('posts',PostController::class);
-
-});
-Route::group(['prefix'=>'posts'],function(){
-    Route::get('/',[PostController::class,'index'])->name('posts.index');
-    Route::get('/{post}',[PostController::class,'show'])->name('posts.show');
-    Route::get('/create',[PostController::class,'create'])->name('posts.create');
-    Route::get('/{post}/edit',[PostController::class,'edit'])->name('posts.edit')->middleware('can:update_post,post');
-    Route::post('/',[PostController::class,'store'])->name('posts.store');
-    Route::put('/{post}',[PostController::class,'update'])->name('posts.update');
-    Route::delete('/{post}',[PostController::class,'destroy'])->name('posts.destroy')->middleware('can:update_post,post');
-
-});
+    Route::get('/posts',[PostController::class,'index'])->name('posts.index');
+    Route::get('posts/create' ,[PostController::class,'create'])->name('posts.create');
+    Route::get('posts/{post}',[PostController::class,'show'])->name('posts.show');
+    Route::get('posts/{post}/edit',[PostController::class,'edit'])->name('posts.edit')->middleware('can:update_post,post');
+    Route::post('posts/',[PostController::class,'store'])->name('posts.store');
+    Route::put('posts/{post}',[PostController::class,'update'])->name('posts.update');
+    Route::delete('posts/{post}',[PostController::class,'destroy'])->name('posts.destroy')->middleware('can:update_post,post');
+    Route::get('posts/create' ,[PostController::class,'create'])->name('posts.create');
+    Route::post('/email',[PostController::class,'email']);
+    Route::get('/email',[PostController::class,'show_email']);
 
 
 
 
 
 
-//Route::get('/posts/{post}',PostController:show);
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 

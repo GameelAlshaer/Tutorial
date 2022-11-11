@@ -4,6 +4,10 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use app\models\Tag;
+
+use Illuminate\Support\Facades\DB;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -16,6 +20,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        // $schedule->call(function () {
+        //    //code excute every minute
+        // })->everyMinute();
+
+        $schedule->command('msg:help')->everyMinute();
+
     }
 
     /**

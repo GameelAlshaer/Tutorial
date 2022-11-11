@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 class PostController extends Controller
 {
     /**
@@ -28,7 +30,7 @@ class PostController extends Controller
     {
 
         return view('posts.create',[
-            'tags'=>Tag::all(),
+            'tags' => Tag::all(),
         ]);
     }
 
@@ -75,7 +77,19 @@ class PostController extends Controller
             'post'=>$post,
         ]);
     }
+    public function show_email(){
+        return view('posts.email_me');
+    }
+    public function email(){
+        request()->validate(['email'=>['required','email']]);
 
+        Mail::to(request('email'))->send(new WelcomeMail());
+
+        return redirect('/email')
+        ->with('message','Email Sent Successfully');
+
+
+    }
     /**
      * Update the specified resource in storage.
      *
