@@ -29,7 +29,10 @@ use App\Policies\PostPolicy;
 // )->with('post',$post);
 // });
 
+Route::get('/', function () {
 
+    return "HI YOU ARE IN LAREVL PROJECT";
+});
 
 
     Route::get('/posts',[PostController::class,'index'])->name('posts.index');
